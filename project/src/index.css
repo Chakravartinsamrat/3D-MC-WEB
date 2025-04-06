@@ -1,0 +1,186 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Minecraft';
+  src: url('https://cdn.jsdelivr.net/gh/South-Paw/typeface-minecraft@master/fonts/minecraft.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.pixel-font {
+  font-family: 'Minecraft', monospace;
+  image-rendering: pixelated;
+}
+
+.minecraft-container {
+  border: 4px solid #1D1D1D;
+  position: relative;
+}
+
+.minecraft-container::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  background: linear-gradient(45deg, transparent 25%, rgba(255,255,255,0.1) 50%, transparent 75%);
+  background-size: 200% 200%;
+  animation: borderShine 4s linear infinite;
+}
+
+.minecraft-button {
+  border: 2px solid #2F2F2F;
+  text-shadow: 2px 2px #2F2F2F;
+}
+
+.floating-block {
+  animation: float 6s ease-in-out infinite;
+}
+
+.lava-bubble {
+  animation: bubble 3s ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+  opacity: 0.6;
+}
+
+@keyframes borderShine {
+  0% { background-position: 200% 200%; }
+  100% { background-position: -200% -200%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(var(--rotation, 0deg)); }
+  50% { transform: translateY(-20px) rotate(var(--rotation, 0deg)); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes bubble {
+  0% { 
+    transform: translateY(100vh) translateX(calc(random() * 100vw));
+    opacity: 0.6;
+  }
+  100% { 
+    transform: translateY(-20vh) translateX(calc(random() * 100vw));
+    opacity: 0;
+  }
+}
+
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}
+
+.animate-progress {
+  animation: progress 2s linear;
+  width: 100%;
+}
+
+@keyframes progress {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+
+@keyframes floatUpDiamond {
+  0% {
+    bottom: -20px;
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.8;
+  }
+  80% {
+    opacity: 0.8;
+  }
+  100% {
+    bottom: 120%;
+    opacity: 0;
+  }
+}
+
+.diamond-particle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: #62B6FF;
+  border-radius: 2px;
+  transform: rotate(45deg);
+  bottom: -20px;
+  opacity: 0;
+  animation: floatUpDiamond 8s infinite ease-out;
+}
+
+/* Position diamond particles at different horizontal positions */
+.diamond-particle:nth-child(1) { left: 15%; animation-delay: 0s; }
+.diamond-particle:nth-child(2) { left: 35%; animation-delay: 2s; }
+.diamond-particle:nth-child(3) { left: 55%; animation-delay: 4s; }
+.diamond-particle:nth-child(4) { left: 75%; animation-delay: 1s; }
+.diamond-particle:nth-child(5) { left: 90%; animation-delay: 3s; }
+
+/* Make some particles different sizes */
+.diamond-particle:nth-child(2) { width: 15px; height: 15px; }
+.diamond-particle:nth-child(4) { width: 8px; height: 8px; }
+
+
+@keyframes floatUpLava {
+  0% {
+    bottom: -30px;
+    opacity: 0;
+    transform: translateX(0);
+  }
+  10% {
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateX(20px);
+  }
+  80% {
+    opacity: 0.8;
+    transform: translateX(-20px);
+  }
+  100% {
+    bottom: 120%;
+    opacity: 0;
+    transform: translateX(0);
+  }
+}
+
+.lava-particle {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background-color: #FF4A3C;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #FF8C7C;
+  bottom: -30px;
+  opacity: 0;
+  animation: floatUpLava 10s infinite ease-out;
+}
+
+/* Position lava particles at different horizontal positions with zigzag movement */
+.lava-particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+.lava-particle:nth-child(2) { left: 30%; animation-delay: 2.5s; }
+.lava-particle:nth-child(3) { left: 50%; animation-delay: 5s; }
+.lava-particle:nth-child(4) { left: 70%; animation-delay: 1.5s; }
+.lava-particle:nth-child(5) { left: 85%; animation-delay: 3.5s; }
+
+/* Make some particles different sizes and with different glow effects */
+.lava-particle:nth-child(2) {
+  width: 20px;
+  height: 20px;
+  box-shadow: 0 0 15px #FF8C7C;
+}
+
+.lava-particle:nth-child(4) {
+  width: 12px;
+  height: 12px;
+  box-shadow: 0 0 8px #FF8C7C;
+}
